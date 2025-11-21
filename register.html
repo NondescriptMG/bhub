@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle Hub | Nondescript War Round 1 Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Basic Reset and Theme (CSS) --- */
+        :root {
+            --primary-color: #ff5722; /* Deep Orange/Fire */
+            --secondary-color: #ffc107; /* Yellow Accent */
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #f0f0f0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('assets/battle-bg.jpg'); /* Placeholder image, assume you add one */
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--primary-color);
+        }
+
+        h1 {
+            font-family: 'Russo One', sans-serif;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* --- Form Styling --- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background-color: #333;
+            color: var(--text-color);
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+        }
+
+        /* Styling the dropdown arrows */
+        select {
+            appearance: none; /* Removes default system styling */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f0f0f0'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+            text-transform: uppercase;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #ff8a65;
+            transform: scale(1.01);
+        }
+
+        /* --- Status Message --- */
+        #status-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            display: none; /* Hidden by default */
+            font-weight: 600;
+        }
+
+        .success {
+            background-color: #4CAF50; /* Green */
+        }
+
+        .error, .duplicate {
+            background-color: #f44336; /* Red */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>BATTLE HUB</h1>
+        <h2>Nondescript War Round 1</h2>
+
+        <form id="registrationForm">
+            <input type="hidden" id="TournamentName" name="TournamentName" value="Nondescript War Round 1">
+
+            <div class="form-group">
+                <label for="InGameName">In-Game Name (IGN) *</label>
+                <input type="text" id="InGameName" name="InGameName" placeholder="Enter your Free Fire In-Game Name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="UID">Free Fire UID *</label>
+                <input type="number" id="UID" name="UID" placeholder="Your 9-12 digit Free Fire Player ID" required>
+            </div>
+
+            <div class="form-group">
+                <label for="WhatsAppNumber">WhatsApp Number *</label>
+                <input type="tel" id="WhatsAppNumber" name="WhatsAppNumber" placeholder="Mobile Number for Match ID/Pass" required>
+            </div>
+
+            <div class="form-group">
+                <label for="UPIID">Winning Prize UPI ID (Optional)</label>
+                <input type="text" id="UPIID" name="UPIID" placeholder="Your UPI ID (e.g., example@paytm)">
+            </div>
+            
+            <div class="form-group">
+                <label for="Device">Playing Device *</label>
+                <select id="Device" name="Device" required>
+                    <option value="">-- Select Device --</option>
+                    <option value="Android">Android Smartphone</option>
+                    <option value="iOS">iOS / iPhone / iPad</option>
+                    <option value="Emulator">PC Emulator (Strictly check rules)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="State">State of Residence *</label>
+                <select id="State" name="State" required>
+                    <option value="">-- Select State --</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Delhi">Delhi (NCR)</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="West Bengal">West Bengal</option>
+                    <option value="Other">Other / Union Territory</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="District">District *</label>
+                <input type="text" id="District" name="District" placeholder="Enter your District/City Name" required>
+            </div>
+
+            <button type="submit" id="submitButton">Register for War Round 1</button>
+        </form>
+
+        <div id="status-message"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const statusMessage = document.getElementById('status-message');
+        const submitButton = document.getElementById('submitButton');
+
+        // IMPORTANT: Replace this with the URL you provided
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxkMA0OzgKQYwVWhg5wz_WAhIZAxXyR6-xvwwh6TNYjLLHNjurpkythmVYYIG9yr9gX/exec';
+
+        // Function to display status messages
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = type;
+            statusMessage.style.display = 'block';
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop default form submission
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Processing... Please wait';
+            statusMessage.style.display = 'none';
+
+            // 1. Collect form data into a JavaScript Object
+            const formData = {
+                TournamentName: document.getElementById('TournamentName').value,
+                InGameName: document.getElementById('InGameName').value,
+                UID: document.getElementById('UID').value,
+                WhatsAppNumber: document.getElementById('WhatsAppNumber').value,
+                UPIID: document.getElementById('UPIID').value,
+                State: document.getElementById('State').value,
+                District: document.getElementById('District').value,
+                Device: document.getElementById('Device').value,
+            };
+
+            // Basic Client-Side Validation (Ensuring required fields are not empty)
+            if (formData.UID.length < 9 || formData.WhatsAppNumber.length < 10 || formData.State === "") {
+                showStatus('Please fill all mandatory fields correctly.', 'error');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Register for War Round 1';
+                return;
+            }
+            
+            // 2. Send data to Google Apps Script using Fetch API
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Essential for basic Apps Script deployment
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData) // Send data as JSON string
+            })
+            .then(response => {
+                // Since we use 'no-cors', the actual response status cannot be read directly.
+                // We rely on the Apps Script logic for feedback, which typically requires a second fetch or redirection for a 'no-cors' setup.
+                // However, for simplicity and guaranteed data sending:
+
+                // Assume success after 2 seconds delay, and reset button.
+                // NOTE: The Apps Script script already handles the validation (like duplicate UID), which is the most critical part.
+                setTimeout(() => {
+                    showStatus('Registration Attempt Sent! Check your WhatsApp for confirmation.', 'success');
+                    form.reset(); // Clear form after assumed success
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Register for War Round 1';
+                }, 2000);
+
+            })
+            .catch(error => {
+                // This catch handles network errors, not server-side (script) logic errors
+                console.error('Network Error:', error);
+                showStatus('Network connection error. Try again.', 'error');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Register for War Round 1';
+            });
+
+            /*
+            --- ADVANCED: Alternative Fetch for Better Error Handling (Requires different deployment setting) ---
+            
+            If you change the Apps Script deployment to allow CORS (by serving HTML directly from the script), 
+            you can use this better structure:
+
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    showStatus(data.message, 'success');
+                    form.reset();
+                } else if (data.result === 'duplicate') {
+                    showStatus(data.message, 'duplicate');
+                } else {
+                    showStatus('Registration failed: ' + data.message, 'error');
+                }
+                submitButton.disabled = false;
+                submitButton.textContent = 'Register for War Round 1';
+            })
+            .catch(error => {
+                showStatus('Server or network error. Try again.', 'error');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Register for War Round 1';
+            });
+            */
+        });
+    </script>
+
+</body>
+</html>
