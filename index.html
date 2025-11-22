@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle Hub - Free Fire Tournament Hub</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font family -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020420; /* Deep Midnight Blue Background */
+            color: #E2E8F0; /* Light Gray Text */
+            /* Custom CSS for title animation */
+            animation: fadeIn 1s ease-out;
+            /* Ensure no unnecessary horizontal scrollbar */
+            overflow-x: hidden; 
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Neon Blue/Cyan Glow for text and buttons */
+        .neon-glow {
+            text-shadow: 0 0 5px #06B6D4, 0 0 10px #06B6D4;
+        }
+        /* Custom card background for depth */
+        .card-bg {
+            background-color: #0F172A; /* Dark Slate Blue */
+            border: 1px solid #0E7490;
+            transition: all 0.3s ease;
+        }
+        .card-bg:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.3);
+        }
+        .coming-soon-btn {
+            cursor: not-allowed;
+            background-color: #374151; /* Gray background */
+            color: #D1D5DB; /* Light gray text */
+            box-shadow: none;
+        }
+        /* New style for inactive BR cards */
+        .inactive-card {
+            background-color: #07091B; /* Very dark background */
+            border: 2px solid #1E40AF; /* Darker blue border */
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        .inactive-card:hover {
+            opacity: 1;
+            transform: none; /* Disable lift on hover for inactive cards */
+            box-shadow: 0 0 15px rgba(30, 64, 175, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 bg-blue-900/90 backdrop-blur-sm shadow-lg shadow-blue-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo/Title -->
+                <div class="flex items-center">
+                    <!-- Note: The logo.png is expected to be in assets/images/ -->
+                    <img src="assets/images/logo.png" alt="Battle Hub Logo" class="h-8 w-auto mr-3 rounded-full border-2 border-cyan-400" onerror="this.onerror=null;this.src='https://placehold.co/32x32/06B6D4/FFFFFF?text=BH'">
+                    <span class="text-2xl font-extrabold text-cyan-400 tracking-wider neon-glow">BATTLE HUB</span>
+                </div>
+                <!-- Navigation Links (Hidden on mobile, shown on desktop) -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-200 hover:text-cyan-400 transition duration-300">Home</a>
+                    <a href="#tournaments" class="text-gray-200 hover:text-cyan-400 transition duration-300">Tournaments</a>
+                    <a href="#" class="text-gray-200 hover:text-cyan-400 transition duration-300">Register</a>
+                    <button id="open-agreement-btn" class="text-gray-200 hover:text-cyan-400 transition duration-300">Agreement</button>
+                </nav>
+                <!-- Mobile Menu Button (Hamburger) -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-200 hover:text-cyan-400 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu (initially hidden) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blue-900/90 pb-4">
+            <a href="#home" class="block px-4 py-2 text-sm text-gray-200 hover:bg-blue-800">Home</a>
+            <a href="#tournaments" class="block px-4 py-2 text-sm text-gray-200 hover:bg-blue-800">Tournaments</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-blue-800">Register</a>
+            <button class="block px-4 py-2 text-sm text-gray-200 hover:bg-blue-800 w-full text-left" onclick="document.getElementById('agreement-modal').classList.remove('hidden')">Agreement</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Hero Section -->
+        <section id="home" class="text-center mb-16 py-16 bg-blue-900/20 rounded-xl card-bg">
+            <h1 class="text-5xl sm:text-7xl font-black text-white mb-4 tracking-tight" style="animation: text-pop 0.5s ease-out;">
+                THE <span class="text-cyan-400 neon-glow">NEXT LEVEL</span> OF ESPORTS
+            </h1>
+            <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                Join the ultimate arena for Battle Royale action. Currently hosting the biggest Free Fire MAX tournaments!
+            </p>
+            <a href="#tournaments" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-blue-900 bg-cyan-400 hover:bg-cyan-300 transition duration-300 shadow-lg shadow-cyan-500/50 uppercase tracking-wider animate-bounce">
+                Explore All Tournaments
+            </a>
+        </section>
+
+        <!-- Upcoming Tournaments Section (MOVED UP) -->
+        <section id="tournaments" class="mb-20">
+            <h2 class="text-4xl font-bold text-center text-white mb-10 neon-glow">UPCOMING FREE FIRE MAX TOURNAMENTS</h2>
+            
+            <div class="space-y-12">
+                <!-- Tournament 1: N WAR - ROUND 1 (Featured - Active Registration) -->
+                <div class="card-bg p-6 sm:p-10 rounded-xl border-4 border-cyan-500/50 shadow-2xl shadow-cyan-900/50">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <!-- Tournament Details -->
+                        <div>
+                            <span class="text-sm font-semibold uppercase text-cyan-400 tracking-widest block mb-2">FEATURED | FREE FIRE MAX</span>
+                            <h3 class="text-4xl sm:text-5xl font-extrabold text-white mb-4">N WAR - ROUND 1</h3>
+                            
+                            <div class="space-y-4 text-lg mt-6">
+                                <p class="flex items-center"><span class="text-cyan-400 mr-3">&#9679;</span> Mode: <span class="font-bold ml-2">Solo</span></p>
+                                <p class="flex items-center"><span class="text-cyan-400 mr-3">&#9679;</span> Expected Participants: <span class="font-bold ml-2">1000+ Players</span></p>
+                                <p class="flex items-center"><span class="text-cyan-400 mr-3">&#9679;</span> Entry Fee: <span class="font-bold ml-2 text-green-400">FREE ENTRY</span></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Prize and CTA -->
+                        <div class="text-center md:text-right p-6 bg-blue-900 rounded-lg">
+                            <p class="text-xl font-medium text-gray-400 mb-1 uppercase">Total Prize Pool</p>
+                            <p class="text-5xl font-black text-yellow-400 neon-glow">₹50,000/-</p>
+                            <p class="text-sm font-bold text-cyan-400 mb-6 mt-1">Register Now! Limited Slots.</p>
+                            <button class="w-full px-12 py-3 bg-red-600 hover:bg-red-500 text-white text-lg font-bold rounded-full transition duration-300 shadow-xl shadow-red-700/50 uppercase transform hover:scale-105">
+                                REGISTER NOW
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tournament 2: N WAR - ROUND 2 (Coming Soon) -->
+                <div class="card-bg p-6 rounded-xl">
+                    <div class="grid md:grid-cols-3 gap-6 items-center">
+                        <div class="md:col-span-2">
+                            <span class="text-sm font-semibold uppercase text-blue-400 tracking-widest block mb-2">UPCOMING | FREE FIRE MAX</span>
+                            <h3 class="text-3xl font-extrabold text-white mb-4">N WAR - ROUND 2</h3>
+                            
+                            <div class="flex flex-wrap gap-4 text-sm mt-3">
+                                <span class="text-gray-400 font-medium">Mode: <span class="font-bold text-white">Squad</span></span>
+                                <span class="text-gray-400 font-medium">Players: <span class="font-bold text-white">500+ Squads</span></span>
+                                <span class="text-gray-400 font-medium">Entry: <span class="font-bold text-green-400">FREE ENTRY</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <p class="text-xl font-medium text-gray-400 mb-1">Estimated Prize Pool</p>
+                            <p class="text-3xl font-black text-yellow-500">₹1,00,000/-</p>
+                            <button class="w-full mt-4 px-8 py-2 text-lg font-bold rounded-full coming-soon-btn">
+                                COMING SOON...
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tournament 3: THE ULTIMATE BATTLE (Coming Soon) -->
+                <div class="card-bg p-6 rounded-xl">
+                    <div class="grid md:grid-cols-3 gap-6 items-center">
+                        <div class="md:col-span-2">
+                            <span class="text-sm font-semibold uppercase text-blue-400 tracking-widest block mb-2">MAJOR EVENT | FREE FIRE MAX</span>
+                            <h3 class="text-3xl font-extrabold text-white mb-4">THE ULTIMATE BATTLE</h3>
+                            
+                            <div class="flex flex-wrap gap-4 text-sm mt-3">
+                                <span class="text-gray-400 font-medium">Mode: <span class="font-bold text-white">Duo</span></span>
+                                <span class="text-gray-400 font-medium">Players: <span class="font-bold text-white">200+ Duos</span></span>
+                                <span class="text-gray-400 font-medium">Entry: <span class="font-bold text-green-400">FREE ENTRY</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <p class="text-xl font-medium text-gray-400 mb-1">Estimated Prize Pool</p>
+                            <p class="text-3xl font-black text-yellow-500">₹25,000/-</p>
+                            <button class="w-full mt-4 px-8 py-2 text-lg font-bold rounded-full coming-soon-btn">
+                                COMING SOON...
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Live Leaderboard Section (MOVED DOWN) -->
+        <section id="leaderboard" class="mb-20 pt-12 border-t border-blue-900/50">
+            <h2 class="text-4xl font-bold text-center text-white mb-6 tracking-wide">LIVE LEADERBOARD</h2>
+            
+            <div class="relative card-bg p-6 rounded-xl overflow-hidden min-h-[300px] flex items-center justify-center">
+                <!-- Placeholder for the actual Leaderboard data structure (Hidden under the blur) -->
+                <div class="w-full text-sm text-gray-600 space-y-3 p-4">
+                    <div class="flex justify-between font-bold text-gray-700 mb-2"><span>#</span><span>Player ID</span><span class="hidden sm:inline">Kills</span><span>Points</span></div>
+                    <!-- Placeholder rows -->
+                    <div class="flex justify-between py-2 border-b border-gray-800/50"><span>1</span><span>GamerX_69</span><span class="hidden sm:inline">150</span><span>2500</span></div>
+                    <div class="flex justify-between py-2 border-b border-gray-800/50"><span>2</span><span>SilentKiller</span><span class="hidden sm:inline">145</span><span>2450</span></div>
+                    <div class="flex justify-between py-2 border-b border-gray-800/50"><span>3</span><span>Phantom</span><span class="hidden sm:inline">130</span><span>2300</span></div>
+                    <div class="flex justify-between py-2 border-b border-gray-800/50"><span>4</span><span>NoobMaster</span><span class="hidden sm:inline">128</span><span>2280</span></div>
+                    <div class="flex justify-between py-2 border-b border-gray-800/50"><span>5</span><span>BladeRunner</span><span class="hidden sm:inline">122</span><span>2220</span></div>
+                    <div class="flex justify-between py-2 border-b border-gray-800/50"><span>6</span><span>ApexLegend</span><span class="hidden sm:inline">110</span><span>2100</span></div>
+                    <div class="flex justify-between py-2 border-b border-gray-800/50"><span>7</span><span>FireBolt</span><span class="hidden sm:inline">105</span><span>2050</span></div>
+                    <div class="flex justify-between py-2 border-b border-gray-800/50"><span>8</span><span>Shadow</span><span class="hidden sm:inline">98</span><span>1980</span></div>
+                    <div class="flex justify-between py-2 border-b border-gray-800/50"><span>9</span><span>Rampage</span><span class="hidden sm:inline">95</span><span>1950</span></div>
+                    <div class="flex justify-between py-2"><span>10</span><span>Destroyer</span><span class="hidden sm:inline">90</span><span>1900</span></div>
+                </div>
+
+                <!-- Blurred Overlay -->
+                <!-- The backdrop-blur-sm and bg-black/80 create the desired effect -->
+                <div class="absolute inset-0 bg-black/80 backdrop-blur-sm rounded-xl flex items-center justify-center border-4 border-dashed border-cyan-600/50">
+                    <div class="text-center p-8">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-cyan-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                        <p class="text-3xl font-extrabold text-white uppercase tracking-wider neon-glow">
+                            No Tournament Started
+                        </p>
+                        <p class="text-gray-400 mt-2">Check back once N War - Round 1 begins!</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Coming Soon Other Games Section -->
+        <section id="other-games" class="mb-20 pt-12 border-t border-blue-900/50">
+            <!-- Neon Glowing Header -->
+            <h2 class="text-3xl font-bold text-center text-cyan-400 mb-10 tracking-wide neon-glow">OTHER BATTLE ROYALE TITLES</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- BGMI Card (Inactive Style) -->
+                <div class="inactive-card p-6 rounded-xl text-center shadow-lg hover:shadow-cyan-900/50">
+                    <h3 class="text-2xl font-bold text-gray-200 mb-2">BATTLEGROUNDS MOBILE INDIA (BGMI)</h3>
+                    <p class="text-5xl font-extrabold text-blue-400 mt-4 mb-6 tracking-tight">LOCKED</p>
+                    <p class="text-gray-500 text-sm">We are currently securing partnerships to bring you massive BGMI tournaments. Stay tuned!</p>
+                </div>
+                
+                <!-- Indus BR Card (Inactive Style) -->
+                <div class="inactive-card p-6 rounded-xl text-center shadow-lg hover:shadow-cyan-900/50">
+                    <h3 class="text-2xl font-bold text-gray-200 mb-2">INDUS BATTLE ROYALE</h3>
+                    <p class="text-5xl font-extrabold text-blue-400 mt-4 mb-6 tracking-tight">LOCKED</p>
+                    <p class="text-gray-500 text-sm">The wait is almost over. Prepare for tournaments in the Metaverse of Indus.</p>
+                </div>
+
+                <!-- Custom Card for other BR (Inactive Style - Community Vote) -->
+                <div class="inactive-card p-6 rounded-xl text-center shadow-lg hover:shadow-cyan-900/50">
+                    <h3 class="text-2xl font-bold text-gray-200 mb-2">OTHER BR GAMES</h3>
+                    <p class="text-5xl font-extrabold text-blue-400 mt-4 mb-6 tracking-tight">VOTE</p>
+                    <p class="text-gray-500 text-sm">Tell us which game you want to compete in next (PUBG, COD:W, etc.).</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-950 py-8 text-center border-t-4 border-cyan-500/50">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="text-gray-400 text-sm mb-4">
+                &copy; 2025 Battle Hub. All Rights Reserved. 
+                <span class="mx-2 text-cyan-400/50">|</span> 
+                Not affiliated with Garena Free Fire.
+            </p>
+            <div class="space-x-4">
+                <a href="#" class="text-gray-400 hover:text-cyan-400 transition duration-200 font-medium text-sm border-b border-transparent hover:border-cyan-400">Privacy Policy</a>
+                <span class="text-gray-600">/</span>
+                <a href="#" class="text-gray-400 hover:text-cyan-400 transition duration-200 font-medium text-sm border-b border-transparent hover:border-cyan-400">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Agreement Modal (Hidden by default) -->
+    <div id="agreement-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-80 transition-opacity duration-300">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="card-bg max-w-3xl w-full p-8 rounded-xl shadow-2xl transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
+                <h3 class="text-3xl font-bold text-cyan-400 mb-4 border-b pb-2 border-cyan-600">Tournament Agreement & Rules</h3>
+                
+                <div class="h-96 overflow-y-auto pr-4 text-gray-300 text-sm space-y-3">
+                    <!-- The agreement content remains the same as previously provided -->
+                    <h4 class="text-xl font-semibold text-white">1. Eligibility and Registration</h4>
+                    <p>1.1. Participants must be 18 years or older, or have parental/guardian consent to participate and claim prizes.</p>
+                    <p>1.2. All registrations must be completed through the official Battle Hub portal prior to the registration deadline.</p>
+
+                    <h4 class="text-xl font-semibold text-white pt-2">2. Game Rules and Conduct</h4>
+                    <p>2.1. The tournament will be played on Free Fire MAX on the specified server and map rotation (Bermuda, Purgatory, Kalahari). Failure to join the correct room on time will result in disqualification.</p>
+                    <p>2.2. Use of any third-party software, hacks, cheats, or exploits (including VPNs to bypass regional restrictions) is strictly forbidden. Detected use will result in immediate and permanent ban from Battle Hub tournaments and forfeiture of any prizes.</p>
+                    <p>2.3. Teaming, stream sniping, or any form of unfair play is prohibited. All decisions on cheating are at the sole discretion of the Battle Hub admin team, and are final.</p>
+
+                    <h4 class="text-xl font-semibold text-white pt-2">3. Prize Distribution (₹50,000/- Pool)</h4>
+                    <p>3.1. Prize money distribution will be announced prior to the event start. Prizes are typically processed within 30 days after the final match, pending verification of player legitimacy.</p>
+                    <p>3.2. All taxes, fees, and bank transfer charges associated with prize money are the sole responsibility of the winner.</p>
+
+                    <h4 class="text-xl font-semibold text-white pt-2">4. General Terms</h4>
+                    <p>4.1. Battle Hub reserves the right to modify, postpone, or cancel any tournament due to unforeseen circumstances or insufficient participation. Participants will be notified via email.</p>
+                    <p>4.2. By participating, players consent to Battle Hub using their in-game name, likeness, and match footage for promotional purposes.</p>
+                    <p class="font-bold text-red-400">I have read and agree to all the terms and conditions outlined above. (This agreement must be digitally confirmed during the registration process.)</p>
+                </div>
+                
+                <button id="close-agreement-btn" class="mt-6 w-full px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-lg transition duration-300">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // JavaScript for modal handling
+        const modal = document.getElementById('agreement-modal');
+        const modalContent = document.getElementById('modal-content');
+        const openBtn = document.getElementById('open-agreement-btn');
+        const closeBtn = document.getElementById('close-agreement-btn');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            // Animate in the modal content
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 50);
+        }
+
+        function closeModal() {
+            // Animate out the modal content
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            
+            // Hide the modal after animation
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside (on the backdrop)
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
